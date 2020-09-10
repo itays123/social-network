@@ -1,0 +1,25 @@
+{
+  "name": "social-network",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api/index.js",
+  "scripts": {
+    "server": "nodemon api/index.js"
+  },
+  "author": "itay schechner",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.1.5",
+    "apollo-boost": "^0.4.9",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-link-http": "^1.5.17",
+    "apollo-server": "^2.17.0",
+    "apollo-server-express": "^2.17.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql-tag": "^2.11.0",
+    "graphql-tools": "^6.2.1",
+    "neo4j-driver": "^4.1.2",
+    "neo4j-graphql-js": "^2.16.3"
+  }
+}
