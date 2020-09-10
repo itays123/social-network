@@ -4,7 +4,11 @@
   "description": "",
   "main": "api/index.js",
   "scripts": {
-    "server": "nodemon api/index.js"
+    "server": "nodemon server/index.js",
+    "client": "npm run start --prefix ui",
+    "build": "npm run build --prefix ui",
+    "start": "node server/index.js",
+    "prod": "npm run build && npm start"
   },
   "author": "itay schechner",
   "license": "ISC",
