@@ -8,9 +8,13 @@ type User {
   @cypher(statement: "MATCH (this: User)-[:FOLLOWS]->(u: User) RETURN count(u)")
   followerCount: Int
   @cypher(statement: "MATCH (this: User)<-[:FOLLOWS]-(u: User) RETURN count(u)")
-  commonWith(filter: _UserFilter): [User]
+  alsoFollows(filter: _UserFilter): [User]
   @cypher(
     statement: "MATCH (u:User)-[:FOLLOWS]->(c:User)<-[:FOLLOWS]-(this) WHERE id(u)= $filter._id OR u.name = $filter.name RETURN c"
+  )
+  alsoFollowedBy(filter: _UserFilter): [User]
+  @cypher(
+    statement: "MATCH (this)<-[:FOLLOWS]-(c:User)<-[:FOLLOWS]-(u:User) WHERE (id(u)= $filter._id OR u.name = $filter.name) AND (this)<-[:FOLLOWS]-(u) RETURN c"
   )
 }
 
