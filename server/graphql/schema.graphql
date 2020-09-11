@@ -1,3 +1,14 @@
 type User {
   name: String!
+  liked: [Post] @relation(name: "LIKED", direction: "OUT")
+  created: [Post] @relation(name: "POSTED", direction: "OUT")
+}
+
+type Post {
+  title: String!
+  content: String!
+  likes: Int
+  @cypher(statement: "MATCH (this: Post)<-[:LIKED]-(u:User) RETURN count(u)")
+  Author: User
+  @cypher(statement: "MATCH (this: Post)<-[:POSTED]-(u:User) RETURN u LIMIT 1")
 }
