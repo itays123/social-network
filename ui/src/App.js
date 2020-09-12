@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useQuery, gql } from '@apollo/client';
+
+const GET_USERS = gql`
+  query GetUsers {
+    User {
+      _id
+      name
+    }
+  }
+`;
 
 function App() {
+  const { data } = useQuery(GET_USERS);
+  console.log(data.User);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>data is fetched!</h1>
     </div>
   );
 }
