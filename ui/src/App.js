@@ -13,7 +13,7 @@ const GET_USERS = gql`
 
 function App() {
   const { data } = useQuery(GET_USERS);
-  console.log(data.User);
+  console.log(data?.User);
   return (
     <div className="App">
       <h1>data is fetched!</h1>
