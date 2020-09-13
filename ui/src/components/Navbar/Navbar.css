@@ -3,10 +3,20 @@ nav {
   border-bottom: 1px solid #aaa;
 }
 
-nav .wrapper {
+nav .wrapper,
+nav .links {
   min-height: 56px;
   display: flex;
   flex-direction: row;
   align-items: stretch;
   justify-content: space-between;
+}
+
+nav .links {
+  justify-content: flex-end;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
 }
