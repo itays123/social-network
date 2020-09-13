@@ -1,0 +1,12 @@
+nav {
+  min-height: 56px;
+  border-bottom: 1px solid #aaa;
+}
+
+nav .wrapper {
+  min-height: 56px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}
