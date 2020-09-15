@@ -11,7 +11,9 @@ dotenv.config();
 
 const port = Number(process.env.PORT) || 8080;
 
-const schema = makeAugmentedSchema({ typeDefs });
+const schema = makeAugmentedSchema({
+  typeDefs,
+});
 
 const driver = neo4j.driver(
   process.env.NEO4J_URL || 'bolt://localhost:7687',
@@ -25,6 +27,9 @@ const server = new ApolloServer({
   context: req => ({
     driver,
     ...req,
+    cypherParams: {
+      uid: req.user ? req.user.id : 20,
+    },
   }),
   introspection: true,
   playground: true,

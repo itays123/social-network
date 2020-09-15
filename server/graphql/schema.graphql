@@ -1,5 +1,8 @@
 type User {
+  _id: String! @id
   name: String!
+  email: String!
+  password: String
   liked: [Post] @relation(name: "LIKED", direction: "OUT")
   created: [Post] @relation(name: "POSTED", direction: "OUT")
   following: [User] @relation(name: "FOLLOWS", direction: "OUT")
@@ -19,10 +22,49 @@ type User {
 }
 
 type Post {
+  _id: String! @id
+  date: String
   title: String!
   content: String!
   likes: Int
   @cypher(statement: "MATCH (this: Post)<-[:LIKED]-(u:User) RETURN count(u)")
   Author: User
   @cypher(statement: "MATCH (this: Post)<-[:POSTED]-(u:User) RETURN u LIMIT 1")
+}
+
+type Query {
+  feed(first: Int = 25): [Post]
+  @cypher(
+    statement: """
+    MATCH (u:User)-[:FOLLOWS]->(:User)-[:POSTED]->(p:Post)
+    WHERE id(u) = $cypherParams.uid
+    RETURN p
+    ORDER BY p.date DESC
+    LIMIT $first
+    """
+  )
+}
+
+type Mutation {
+  NewPost(
+    title: String = "Untitled Post"
+    content: String = "<no content>"
+    date: String!
+  ): Post
+  @cypher(
+    statement: """
+    MATCH (u:User) WHERE id(u) = $cypherParams.uid
+    CREATE (p: Post {title: $title, content: $content, date: $date })<-[:POSTED]-(u)
+    RETURN p
+    """
+  )
+  Follow(userId: Int): User
+  @cypher(
+    statement: """
+    MATCH (a:User), (b: User)
+    WHERE id(a) = $cypherParams.uid AND id(b) = $userId
+    CREATE (a)-[:FOLLOWS]->(b)
+    RETURN b
+    """
+  )
 }
