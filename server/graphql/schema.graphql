@@ -76,4 +76,22 @@ type Mutation {
     RETURN b
     """
   )
+  Like(postId: Int): Post
+  @cypher(
+    statement: """
+    MATCH (u:User), (p:Post)
+    WHERE id(u) = $cypherParams.uid AND id(p) = $postId
+    CREATE (u)-[:LIKED]->(p)
+    RETURN p
+    """
+  )
+  Unlike(postId: Int): Post
+  @cypher(
+    statement: """
+    MATCH (u:User)-[r:LIKED]->(p:Post)
+    WHERE id(u) = $cypherParams.uid AND id(p) = $postId
+    DELETE r
+    RETURN p
+    """
+  )
 }
