@@ -58,6 +58,15 @@ type Mutation {
     RETURN p
     """
   )
+  RemovePost(postId: Int): User
+  @cypher(
+    statement: """
+    MATCH (u:User)-[:POSTED]->(p:Post)
+    WHERE id(u) = $cypherParams.uid AND id(p) = $postId
+    DETACH DELETE p
+    RETURN u
+    """
+  )
   Follow(userId: Int): User
   @cypher(
     statement: """
