@@ -67,4 +67,13 @@ type Mutation {
     RETURN b
     """
   )
+  Unfollow(userId: Int): User
+  @cypher(
+    statement: """
+    MATCH (a:User)-[r:FOLLOWS]->(b:User)
+    WHERE id(a) = $cypherParams.uid AND id(b) = $userId
+    DELETE r
+    RETURN b
+    """
+  )
 }
