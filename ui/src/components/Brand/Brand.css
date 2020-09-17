@@ -1,6 +1,8 @@
 .brand img {
   font-size: 0px;
   margin: 4px;
+  margin-left: 2vw;
+  margin-right: 4vw;
 }
 
 .brand h1 {

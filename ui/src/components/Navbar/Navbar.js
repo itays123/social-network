@@ -1,22 +1,24 @@
 import React from 'react';
 import Brand from '../Brand/Brand';
-import Container from '../Container/Container';
 import './Navbar.css';
 import home from '../../assets/home.svg';
 import { NavLink } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = () => (
   <nav>
-    <Container>
-      <div className="wrapper flex a-stretch j-btwn">
+    <div className="wrapper flex a-center j-btwn">
+      <div className="start flex a-center">
         <Brand />
-        <ul className="links flex a-stretch j-end">
-          <NavLink to="/" className="flex a-center j-center">
-            <img width={32} height={32} alt="" src={home} />
-          </NavLink>
-        </ul>
+        <SearchBar />
       </div>
-    </Container>
+
+      <ul className="links flex a-stretch j-end">
+        <NavLink to="/" className="flex a-center j-center">
+          <img width={32} height={32} alt="" src={home} />
+        </NavLink>
+      </ul>
+    </div>
   </nav>
 );
 
