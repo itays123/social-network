@@ -19,11 +19,11 @@ const Content = ({ content }) => {
   return <p>{result}</p>;
 };
 
-const Post = ({ title, content, author, date }) => {
+const Post = ({ title, content, Author, date }) => {
   return (
     <div className="post flex column a-center">
       <header>
-        <Author author={author} />
+        <Author author={Author} />
       </header>
       <div className="title">
         <h3>{title}</h3>
