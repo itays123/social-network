@@ -1,0 +1,37 @@
+:root {
+  --post-border: 1px solid #ddd;
+}
+
+.post {
+  margin: 8px 0;
+  border: var(--post-border);
+  border-radius: 4px;
+  min-width: 300px;
+  background-color: #fefefe;
+}
+
+.post header,
+.post main {
+  padding: 8px 12px;
+}
+
+.post header {
+  border-bottom: var(--post-border);
+}
+
+.post header a {
+  font: inherit;
+  text-decoration: inherit;
+  color: inherit;
+  font-weight: bold;
+  color: #000030;
+}
+
+.post header .date {
+  font-size: 80%;
+  color: #606060;
+}
+
+.post main p {
+  color: #505050;
+}
