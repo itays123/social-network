@@ -1,0 +1,16 @@
+.heart {
+  fill: transparent;
+}
+
+.heart.is-liked {
+  fill: #ff4444;
+}
+
+.heart path {
+  stroke: #aaa;
+  stroke-width: 1px;
+}
+
+.heart.is-liked path {
+  stroke: #ff4444;
+}
