@@ -3,12 +3,21 @@ import './Post.css';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Like from '../Like/Like';
+import { useLike } from '../../hooks/useLike';
 
 const Author = ({ author }) => (
   <Link to={`/author/${author._id}`}>{author.name}</Link>
 );
 
-const Post = ({ content, Author: author, date, likes, isLiked }) => {
+const Post = ({
+  _id,
+  content,
+  Author: author,
+  date,
+  likes: initialLikes,
+  isLiked: initialIsLiked,
+}) => {
+  const { likes, isLiked, toggle } = useLike(initialIsLiked, initialLikes, _id);
   return (
     <div className="post flex column a-stretch">
       <header>
@@ -20,7 +29,7 @@ const Post = ({ content, Author: author, date, likes, isLiked }) => {
       </main>
       <footer className="flex a-center">
         <div className="likes flex">
-          <Like isLiked={isLiked} />
+          <Like isLiked={isLiked} toggle={toggle} />
           <span>{likes}</span>
         </div>
       </footer>
