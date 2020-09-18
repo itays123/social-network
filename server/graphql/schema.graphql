@@ -45,11 +45,11 @@ type Query {
 }
 
 type Mutation {
-  NewPost(content: String = "", date: String!): Post
+  NewPost(content: String = ""): Post
   @cypher(
     statement: """
     MATCH (u:User) WHERE id(u) = $cypherParams.uid
-    CREATE (p: Post {content: $content, date: $date })<-[:POSTED]-(u)
+    CREATE (p: Post {content: $content, date: datetime() })<-[:POSTED]-(u)
     RETURN p
     """
   )

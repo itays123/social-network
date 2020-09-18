@@ -28,7 +28,7 @@ const server = new ApolloServer({
     driver,
     ...req,
     cypherParams: {
-      uid: req.user ? req.user.id : process.env.TEST_USER_ID || 0,
+      uid: req.user ? req.user.id : 2,
     },
   }),
   introspection: true,
