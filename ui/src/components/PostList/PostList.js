@@ -8,7 +8,7 @@ import './PostList.css';
  */
 const PostList = ({ posts }) => {
   return (
-    <div className="posts flex column a-center">
+    <div className="posts flex column a-stretch">
       {posts.map(p => (
         <Post key={p._id} {...p} />
       ))}

@@ -45,3 +45,7 @@ code {
 .flex.a-stretch {
   align-items: stretch;
 }
+
+.flex.j-evenly {
+  justify-content: space-evenly;
+}

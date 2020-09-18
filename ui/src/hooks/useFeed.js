@@ -4,13 +4,16 @@ const FEED_QUERY = gql`
   {
     feed {
       _id
-      title
       content
-      date
+      date {
+        formatted
+      }
       Author {
         _id
         name
       }
+      likes
+      isLiked
     }
   }
 `;

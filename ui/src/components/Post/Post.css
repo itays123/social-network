@@ -27,11 +27,20 @@
   color: #000030;
 }
 
-.post header .date {
+.post header .date,
+.post footer span {
   font-size: 80%;
   color: #606060;
 }
 
 .post main p {
   color: #505050;
+}
+
+.post footer {
+  padding: 8px;
+}
+
+.post .likes span {
+  margin-left: 4px;
 }
