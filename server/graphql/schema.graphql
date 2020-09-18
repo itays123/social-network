@@ -11,25 +11,24 @@ type User {
   @cypher(statement: "MATCH (this: User)-[:FOLLOWS]->(u: User) RETURN count(u)")
   followerCount: Int
   @cypher(statement: "MATCH (this: User)<-[:FOLLOWS]-(u: User) RETURN count(u)")
-  alsoFollows(filter: _UserFilter): [User]
-  @cypher(
-    statement: "MATCH (u:User)-[:FOLLOWS]->(c:User)<-[:FOLLOWS]-(this) WHERE id(u)= $filter._id OR u.name = $filter.name RETURN c"
-  )
-  alsoFollowedBy(filter: _UserFilter): [User]
-  @cypher(
-    statement: "MATCH (this)<-[:FOLLOWS]-(c:User)<-[:FOLLOWS]-(u:User) WHERE (id(u)= $filter._id OR u.name = $filter.name) AND (this)<-[:FOLLOWS]-(u) RETURN c"
-  )
 }
 
 type Post {
   _id: String! @id
-  date: String
-  title: String!
+  date: _Neo4jDateTime
   content: String!
   likes: Int
   @cypher(statement: "MATCH (this: Post)<-[:LIKED]-(u:User) RETURN count(u)")
   Author: User
   @cypher(statement: "MATCH (this: Post)<-[:POSTED]-(u:User) RETURN u LIMIT 1")
+  isLiked: Boolean
+  @cypher(
+    statement: """
+    MATCH (this:Post)<-[r:LIKED]-(u:User)
+    WHERE id(u) = $cypherParams.uid
+    RETURN count(r) > 0
+    """
+  )
 }
 
 type Query {
@@ -46,15 +45,11 @@ type Query {
 }
 
 type Mutation {
-  NewPost(
-    title: String = "Untitled Post"
-    content: String = "<no content>"
-    date: String!
-  ): Post
+  NewPost(content: String = "", date: String!): Post
   @cypher(
     statement: """
     MATCH (u:User) WHERE id(u) = $cypherParams.uid
-    CREATE (p: Post {title: $title, content: $content, date: $date })<-[:POSTED]-(u)
+    CREATE (p: Post {content: $content, date: $date })<-[:POSTED]-(u)
     RETURN p
     """
   )
