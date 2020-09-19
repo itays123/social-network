@@ -3,6 +3,7 @@ type User {
   name: String!
   email: String!
   password: String
+  avatarUrl: String
   liked: [Post] @relation(name: "LIKED", direction: "OUT")
   created: [Post] @relation(name: "POSTED", direction: "OUT")
   following: [User] @relation(name: "FOLLOWS", direction: "OUT")
@@ -96,6 +97,14 @@ type Mutation {
     WHERE id(u) = $cypherParams.uid AND id(p) = $postId
     DELETE r
     RETURN p
+    """
+  )
+  SetAvatarUrl(url: String): User
+  @cypher(
+    statement: """
+    MATCH (u:User) WHERE id(u) = $cypherParams.uid
+    SET u.avatarUrl = $url
+    RETURN u
     """
   )
 }
