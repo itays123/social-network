@@ -1,0 +1,15 @@
+.profile-picture {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #cdcdcd;
+  overflow: hidden;
+}
+
+.profile-picture .pic {
+  width: 36px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}

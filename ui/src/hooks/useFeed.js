@@ -11,6 +11,7 @@ const FEED_QUERY = gql`
       Author {
         _id
         name
+        avatarUrl
       }
       likes
       isLiked

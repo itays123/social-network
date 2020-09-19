@@ -15,8 +15,8 @@
   padding: 8px 12px;
 }
 
-.post header {
-  border-bottom: var(--post-border);
+.post header .profile {
+  margin-right: 8px;
 }
 
 .post header a {

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Like from '../Like/Like';
 import { useLike } from '../../hooks/useLike';
+import ProfilePic from '../ProfilePic/ProfilePic';
 
 const Author = ({ author }) => (
   <Link to={`/author/${author._id}`}>{author.name}</Link>
@@ -20,9 +21,16 @@ const Post = ({
   const { likes, isLiked, toggle } = useLike(initialIsLiked, initialLikes, _id);
   return (
     <div className="post flex column a-stretch">
-      <header>
-        <Author author={author} />
-        <div className="date">{moment(new Date(date.formatted)).fromNow()}</div>
+      <header className="flex a-stretch">
+        <div className="profile">
+          <ProfilePic url={author.avatarUrl} />
+        </div>
+        <div>
+          <Author author={author} />
+          <div className="date">
+            {moment(new Date(date.formatted)).fromNow()}
+          </div>
+        </div>
       </header>
       <main>
         <p>{content}</p>
