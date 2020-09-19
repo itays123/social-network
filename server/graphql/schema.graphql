@@ -43,6 +43,13 @@ type Query {
     LIMIT $first
     """
   )
+  Profile: User
+  @cypher(
+    statement: """
+    MATCH (u:User) WHERE id(u) = $cypherParams.uid
+    RETURN u
+    """
+  )
 }
 
 type Mutation {
