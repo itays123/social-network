@@ -7,7 +7,7 @@ import { useLike } from '../../hooks/useLike';
 import ProfilePic from '../ProfilePic/ProfilePic';
 
 const Author = ({ author }) => (
-  <Link to={`/author/${author._id}`}>{author.name}</Link>
+  <Link to={`/u/${author._id}`}>{author.name}</Link>
 );
 
 const Post = ({
