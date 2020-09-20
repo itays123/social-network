@@ -1,0 +1,22 @@
+.create-post {
+  padding: 4px 8px 0;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.create-post form {
+  margin: 8px 0 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-width: 300px;
+  background-color: #fefefe;
+}
+
+.create-post form .text {
+  padding: 12px 12px 8px;
+}
+
+.create-post form .rta-container {
+  width: 100%;
+  padding-top: 8px;
+}

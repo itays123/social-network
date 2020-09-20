@@ -1,0 +1,13 @@
+textarea.resizeable {
+  border: none;
+  padding-left: 8px;
+  width: 100%;
+  resize: none;
+  font-family: inherit;
+  overflow: hidden;
+}
+
+textarea.resizeable:focus {
+  border: none;
+  outline: none;
+}
