@@ -7,7 +7,7 @@ const UserCard = ({ name, avatarUrl, followingCount, followerCount }) => {
     <div className="card-wrapper">
       <div className="user-card flex a-stretch j-center">
         <div className="profile">
-          <ProfilePic url={avatarUrl} />
+          <ProfilePic url={avatarUrl} size={108} />
         </div>
         <div>
           <h1>{name}</h1>
