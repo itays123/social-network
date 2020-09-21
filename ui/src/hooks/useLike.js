@@ -22,7 +22,7 @@ const UNLIKE_POST = gql`
 
 /**
  * handles like and unlike mutations
- * @param {boolean} initialValue
+ * @param {boolean} initialIsLiked
  * @param {number} initialLikes
  * @param {*} postId
  * @returns {{ likes: number, isLiked: bookean, toggle: Function }}
@@ -62,8 +62,8 @@ export function useLike(initialIsLiked, initialLikes, postId) {
   }, [likeData]);
 
   useEffect(() => {
-    if (unlikeData?.Like) {
-      updateValues(unlikeData.Like);
+    if (unlikeData?.Unlike) {
+      updateValues(unlikeData.Unlike);
     }
   }, [unlikeData]);
 
