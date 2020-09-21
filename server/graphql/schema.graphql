@@ -12,6 +12,14 @@ type User {
   @cypher(statement: "MATCH (this: User)-[:FOLLOWS]->(u: User) RETURN count(u)")
   followerCount: Int
   @cypher(statement: "MATCH (this: User)<-[:FOLLOWS]-(u: User) RETURN count(u)")
+  isFollowing: Boolean
+  @cypher(
+    statement: """
+    MATCH (this:User)<-[r:FOLLOWS]-(u:User)
+    WHERE id(u) = $cypherParams.uid
+    RETURN count(r) > 0
+    """
+  )
 }
 
 type Post {
