@@ -8,3 +8,7 @@
   margin: 0 auto;
   padding: 8px 0;
 }
+
+.user-card .profile {
+  margin-right: 24px;
+}
