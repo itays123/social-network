@@ -7,6 +7,7 @@ const USER_QUERY = gql`
       followerCount
       followingCount
       avatarUrl
+      isFollowing
       created {
         _id
         content
@@ -29,5 +30,5 @@ export default function useUser(userId) {
   const { data, loading } = useQuery(USER_QUERY, { variables: { userId } });
   const isFound = loading ? true : data?.User.length > 0 ? true : false;
   const user = data?.User?.[0] || {};
-  return { ...user, isFound };
+  return { ...user, isFound, loading };
 }

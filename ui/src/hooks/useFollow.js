@@ -6,7 +6,7 @@ const FOLLOW_USER = gql`
   mutation FollowUser($userId: Int) {
     Follow(userId: $userId) {
       isFollowing
-      followingCount
+      followerCount
     }
   }
 `;
@@ -15,7 +15,7 @@ const UNFOLLOW_USER = gql`
   mutation UnfollowUser($userId: Int) {
     Unfollow(userId: $userId) {
       isFollowing
-      followingCount
+      followerCount
     }
   }
 `;
@@ -25,12 +25,12 @@ const UNFOLLOW_USER = gql`
  * @param {boolean} initialIsFollowing
  * @param {number} initialFollowing
  * @param {*} userId
- * @returns {{ followingCount: number, isFollowing: boolean, toggle: Function }}
+ * @returns {{ followerCount: number, isFollowing: boolean, toggle: Function }}
  */
 export function useFollow(initialIsFollowing, initialFollowing, userId) {
   userId = Number(userId);
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
-  const [followingCount, setFollowingCount] = useState(initialFollowing);
+  const [followerCount, setFollowerCount] = useState(initialFollowing);
   const [
     dispatchFollowUser,
     { data: followData, error: followClientError },
@@ -42,20 +42,20 @@ export function useFollow(initialIsFollowing, initialFollowing, userId) {
 
   const updateValues = ({
     isFollowing: newIsFollowing,
-    followingCount: newFollowingCount,
+    followerCount: newFollowerCount,
   }) => {
     setIsFollowing(newIsFollowing);
-    setFollowingCount(newFollowingCount);
+    setFollowerCount(newFollowerCount);
   };
 
   const toggleAndIncrement = () => {
     setIsFollowing(true);
-    setFollowingCount(n => n + 1);
+    setFollowerCount(n => n + 1);
   };
 
   const toggleAndDecrement = () => {
     setIsFollowing(false);
-    setFollowingCount(n => n - 1);
+    setFollowerCount(n => n - 1);
   };
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export function useFollow(initialIsFollowing, initialFollowing, userId) {
 
   return {
     isFollowing,
-    followingCount,
+    followerCount,
     toggle: () => {
       if (!isFollowing) {
         toggleAndIncrement();

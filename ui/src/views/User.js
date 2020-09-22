@@ -8,7 +8,7 @@ const User = () => {
   const user = useUser(id);
   return (
     <div className="user route">
-      <UserCard {...user} />
+      {!user.loading && user.isFound && <UserCard {...user} id={id} />}
     </div>
   );
 };
