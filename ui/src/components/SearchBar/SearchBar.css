@@ -9,3 +9,18 @@
   padding: 0 4px;
   font-size: 80%;
 }
+
+.search-bar input,
+.search-bar form {
+  width: 100%;
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+}
+
+.search-bar input:focus {
+  border: none;
+  outline: none;
+}
