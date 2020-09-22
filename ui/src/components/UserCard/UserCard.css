@@ -12,3 +12,11 @@
 .user-card .profile {
   margin-right: 24px;
 }
+
+.user-card button {
+  width: 100%;
+  margin-top: 4px;
+  padding: 2px;
+  background-color: white;
+  border: 1px solid #cdcdcd;
+}
