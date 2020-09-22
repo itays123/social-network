@@ -58,11 +58,13 @@ type Query {
     RETURN u
     """
   )
-  Search(q: String): [User]
+  Search(q: String, limit: Int = 25, offset: Int = 0): [User]
   @cypher(
     statement: """
     MATCH (u:User) WHERE u.name CONTAINS $q
     RETURN u
+    SKIP $offset
+    LIMIT $limit
     """
   )
 }
