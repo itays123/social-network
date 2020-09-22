@@ -58,6 +58,13 @@ type Query {
     RETURN u
     """
   )
+  Search(q: String): [User]
+  @cypher(
+    statement: """
+    MATCH (u:User) WHERE u.name CONTAINS $q
+    RETURN u
+    """
+  )
 }
 
 type Mutation {
