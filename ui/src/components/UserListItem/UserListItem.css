@@ -1,0 +1,13 @@
+li.user-list-item {
+  background: #fefefe;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.user-list-item .profile {
+  margin-right: 12px;
+}
+
+.user-list-item h5 {
+  font-size: 110%;
+}
