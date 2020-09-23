@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSearch } from '../../hooks/useSearch';
+import Hovering from '../Hovering/Hovering';
+import UserList from '../UserList/UserList';
 import './SearchBar.css';
 
 const SearchBar = () => {
-  const { search } = useSearch();
+  const { search, results } = useSearch();
   const [query, setQuery] = useState('');
+  const ref = useRef({ getBoundingClientRect: () => ({ x: 0, y: 0 }) });
   return (
-    <div className="search-bar flex a-center">
+    <div className="search-bar flex a-center" ref={ref}>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -20,6 +23,11 @@ const SearchBar = () => {
           placeholder="Search..."
         />
       </form>
+      {results.length > 0 && (
+        <Hovering element={ref} onDismiss={() => console.log('dismiss')}>
+          <UserList users={results} />
+        </Hovering>
+      )}
     </div>
   );
 };
