@@ -9,3 +9,12 @@
   background-position: center;
   background-size: cover;
 }
+
+.profile-picture-wrapper {
+  position: relative;
+}
+
+.profile-picture-wrapper .profile-edit,
+.profile-picture-wrapper .profile-delete {
+  position: absolute;
+}

@@ -21,7 +21,7 @@ const UserCard = ({
     <div className="card-wrapper">
       <div className="user-card flex a-stretch j-center">
         <div className="profile">
-          <ProfilePic url={avatarUrl} size={108} />
+          <ProfilePic url={avatarUrl} size={108} self={self} />
         </div>
         <div>
           <h1>{name}</h1>
