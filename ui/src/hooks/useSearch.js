@@ -1,5 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import { gql } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
 const SEARCH_QUERY = gql`
   query SearchUsers($q: String) {
@@ -14,8 +15,15 @@ const SEARCH_QUERY = gql`
 
 export function useSearch() {
   const [searchUser, { data }] = useLazyQuery(SEARCH_QUERY);
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    setResults(data?.Search || []);
+  }, [data]);
+
   return {
     search: q => searchUser({ variables: { q } }),
-    results: data?.Search || [],
+    results,
+    clear: () => setResults([]),
   };
 }

@@ -5,7 +5,7 @@ import UserList from '../UserList/UserList';
 import './SearchBar.css';
 
 const SearchBar = () => {
-  const { search, results } = useSearch();
+  const { search, results, clear } = useSearch();
   const [query, setQuery] = useState('');
   const ref = useRef({ getBoundingClientRect: () => ({ x: 0, y: 0 }) });
   return (
@@ -24,7 +24,7 @@ const SearchBar = () => {
         />
       </form>
       {results.length > 0 && (
-        <Hovering element={ref} onDismiss={() => console.log('dismiss')}>
+        <Hovering element={ref} onDismiss={clear}>
           <UserList users={results} />
         </Hovering>
       )}
