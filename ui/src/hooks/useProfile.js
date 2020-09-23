@@ -7,6 +7,22 @@ const PROFILE_QUERY = gql`
       _id
       name
       avatarUrl
+      followerCount
+      followingCount
+      created {
+        _id
+        content
+        date {
+          formatted
+        }
+        Author {
+          _id
+          name
+          avatarUrl
+        }
+        likes
+        isLiked
+      }
     }
   }
 `;

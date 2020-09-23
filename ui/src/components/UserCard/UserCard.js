@@ -10,6 +10,7 @@ const UserCard = ({
   followerCount: initialFollowerCount,
   isFollowing: initialIsFollowing,
   id,
+  self,
 }) => {
   const { followerCount, isFollowing, toggle } = useFollow(
     initialIsFollowing,
@@ -29,9 +30,11 @@ const UserCard = ({
             <span> &#8226; </span>
             {followerCount} followers
           </div>
-          <button onClick={toggle}>
-            {isFollowing ? 'unfollow' : 'follow'}
-          </button>
+          {!self && (
+            <button onClick={toggle}>
+              {isFollowing ? 'unfollow' : 'follow'}
+            </button>
+          )}
         </div>
       </div>
     </div>
