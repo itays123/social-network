@@ -38,6 +38,7 @@ type Post {
     RETURN count(r) > 0
     """
   )
+  gallery: [String]
 }
 
 type Query {
@@ -70,11 +71,11 @@ type Query {
 }
 
 type Mutation {
-  NewPost(content: String = ""): Post
+  NewPost(content: String = "", gallery: [String] = []): Post
   @cypher(
     statement: """
     MATCH (u:User) WHERE id(u) = $cypherParams.uid
-    CREATE (p: Post {content: $content, date: datetime() })<-[:POSTED]-(u)
+    CREATE (p: Post {content: $content, gallery: $gallery, date: datetime() })<-[:POSTED]-(u)
     RETURN p
     """
   )
