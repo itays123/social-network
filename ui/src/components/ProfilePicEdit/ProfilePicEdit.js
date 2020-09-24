@@ -15,8 +15,9 @@ const ProfilePicEdit = ({ change, top, left }) => {
           <form
             onSubmit={e => {
               e.preventDefault();
-              console.log(newUrl);
               if (newUrl && newUrl !== '') change(newUrl);
+              setImageUrl('');
+              setShowHovering(false);
             }}
           >
             <ImageForm onChange={url => setImageUrl(url)} />

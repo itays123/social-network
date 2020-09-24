@@ -14,7 +14,14 @@ const ProfilePicDelete = ({ remove, top, left }) => {
             Confirm Delete?
             <div className="confirm-buttons flex j-center a-center">
               <button onClick={() => setShowHovering(false)}>Cancel</button>
-              <button onClick={remove}>Delete</button>
+              <button
+                onClick={() => {
+                  remove();
+                  setShowHovering(false);
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </Hovering>
