@@ -19,3 +19,10 @@
   outline: none;
   border: none;
 }
+
+.profile-edit form button {
+  background: none;
+  border: none;
+  outline: none;
+  color: #555;
+}

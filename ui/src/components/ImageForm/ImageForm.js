@@ -16,6 +16,7 @@ const ImageForm = ({ onChange = () => {} }) => {
         onChange={e => {
           const { value } = e.target;
           if (isUrl(value)) onChange(value);
+          else onChange('');
         }}
       />
     </div>
