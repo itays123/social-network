@@ -1,0 +1,9 @@
+.gallery {
+  margin-top: 20px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.gallery img {
+  margin-right: 4px;
+}

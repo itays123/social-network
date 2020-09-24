@@ -5,6 +5,7 @@ import moment from 'moment';
 import Like from '../Like/Like';
 import { useLike } from '../../hooks/useLike';
 import ProfilePic from '../ProfilePic/ProfilePic';
+import PostGallery from '../PostGallery/PostGallery';
 
 const Author = ({ author }) => (
   <Link to={`/u/${author._id}`}>{author.name}</Link>
@@ -17,6 +18,7 @@ const Post = ({
   date,
   likes: initialLikes,
   isLiked: initialIsLiked,
+  gallery,
 }) => {
   const { likes, isLiked, toggle } = useLike(initialIsLiked, initialLikes, _id);
   return (
@@ -34,6 +36,7 @@ const Post = ({
       </header>
       <main>
         <p>{content}</p>
+        {gallery.length > 0 && <PostGallery gallery={gallery} />}
       </main>
       <footer className="flex a-center">
         <div className="likes flex">
