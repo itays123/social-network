@@ -8,3 +8,30 @@ nav .wrapper,
 nav .links {
   min-height: 56px;
 }
+
+nav .links {
+  margin-left: 5vw;
+  width: calc(56vw - 36px);
+  padding-right: 1vw;
+}
+
+@media (max-width: 600px) {
+  nav .links {
+    width: calc(94vw - 36px);
+    padding-right: 2vw;
+  }
+}
+
+nav a {
+  font: inherit;
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.devider {
+  margin: 0 1vw;
+}
+
+.links .main {
+  margin-right: 2vw;
+}

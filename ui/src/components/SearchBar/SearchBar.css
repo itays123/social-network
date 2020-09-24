@@ -10,6 +10,12 @@
   font-size: 80%;
 }
 
+@media (max-width: 600px) {
+  .search-bar {
+    display: none;
+  }
+}
+
 .search-bar input,
 .search-bar form {
   width: 100%;
