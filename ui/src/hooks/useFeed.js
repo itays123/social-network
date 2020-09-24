@@ -5,6 +5,7 @@ const FEED_QUERY = gql`
     feed {
       _id
       content
+      gallery
       date {
         formatted
       }

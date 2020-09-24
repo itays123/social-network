@@ -12,6 +12,7 @@ const PROFILE_QUERY = gql`
       created {
         _id
         content
+        gallery
         date {
           formatted
         }
