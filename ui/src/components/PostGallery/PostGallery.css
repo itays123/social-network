@@ -1,9 +1,20 @@
 .gallery {
   margin-top: 20px;
-  overflow-y: hidden;
-  overflow-x: scroll;
+  overflow: auto;
+  white-space: nowrap;
+  scrollbar-width: 0px;
+  -ms-overflow-style: none;
 }
 
 .gallery img {
+  display: inline-block;
   margin-right: 4px;
+}
+
+.gallery img:last-child {
+  margin-right: 0;
+}
+
+.gallery::-webkit-scrollbar {
+  display: none;
 }
