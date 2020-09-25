@@ -1,0 +1,47 @@
+.post-gallery-form {
+  margin-top: 20px;
+  overflow: auto;
+  white-space: nowrap;
+  scrollbar-width: 0px;
+  -ms-overflow-style: none;
+}
+
+.post-gallery-form .preview,
+.add-picture {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.post-gallery-form .preview:last-child {
+  margin-right: 0;
+}
+
+.post-gallery-form::-webkit-scrollbar {
+  display: none;
+}
+
+.post-gallery-form img {
+  font-size: 0;
+}
+
+.add-picture .clickme {
+  height: 150px;
+  width: 200px;
+  border: none;
+  background: #888;
+  color: #fefefe;
+  font: inherit;
+  font-size: 200%;
+  cursor: pointer;
+}
+
+.post-gallery-form .add-pic {
+  text-align: center;
+  cursor: pointer;
+  background: #888;
+  width: 40px;
+  margin: 2px auto 0;
+  font-size: 80%;
+  border-radius: 8px;
+  color: #fefefe;
+}

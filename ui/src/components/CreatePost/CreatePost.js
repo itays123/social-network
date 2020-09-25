@@ -4,10 +4,12 @@ import useProfile from '../../hooks/useProfile';
 import ProfilePic from '../ProfilePic/ProfilePic';
 import ResizeableTextArea from '../ResizeableTextArea/ResizeableTextArea';
 import { usePost } from '../../hooks/usePost';
+import PostGalleryForm from '../PostGalleryForm/PostGalleryForm';
 
 const CreatePost = ({ refetchPosts }) => {
   const { avatarUrl, name } = useProfile();
   const [content, setContent] = useState('');
+  const [gallery, setGallery] = useState([]);
   const [expand, setExpand] = useState(false);
   const { post } = usePost(refetchPosts);
   const placeHolder = `What's on your mind, ${name ? name.split(' ')[0] : ''}?`;
@@ -17,9 +19,6 @@ const CreatePost = ({ refetchPosts }) => {
         className={expand ? 'expanded' : 'minified'}
         onSubmit={e => {
           e.preventDefault();
-          post([], content);
-          setContent('');
-          setExpand(false);
         }}
       >
         <div className="text flex a-stretch">
@@ -28,18 +27,33 @@ const CreatePost = ({ refetchPosts }) => {
           </div>
           <div className="rta-container">
             <ResizeableTextArea
-              onChange={c => setContent(c)}
+              onChange={c => {
+                setContent(c);
+                setExpand(c.trim() !== '');
+              }}
               value={content}
-              onFocus={() => setExpand(true)}
-              onBlur={() => setExpand(() => content.trim() !== '')}
               placeholder={placeHolder}
             />
           </div>
         </div>
         {expand && (
           <div className="expanded">
+            <div className="pictures">
+              <p>Add Pictures</p>
+              <PostGalleryForm onChange={v => setGallery(v)} />
+            </div>
             <div className="flex j-end">
-              <button>Post</button>
+              <button
+                className="submit"
+                onClick={() => {
+                  post(gallery, content);
+                  setContent('');
+                  setGallery([]);
+                  setExpand(false);
+                }}
+              >
+                Post
+              </button>
             </div>
           </div>
         )}
