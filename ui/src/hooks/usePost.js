@@ -12,15 +12,16 @@ const POST = gql`
 
 /**
  * contains all functionality and error handling to post
+ * @param {Function} refetchPosts
  * @returns {{ post(gallery: string[], content: string): void }}
  */
-export function usePost() {
+export function usePost(refetchPosts = () => {}) {
   const [PostIt, { error, data }] = useMutation(POST);
   useEffect(() => {
     if (!error && data?.NewPost?._id) {
-      console.log(data);
+      refetchPosts();
     }
-  }, [data, error]);
+  }, [data, error, refetchPosts]);
   return {
     post(gallery, content) {
       PostIt({ variables: { gallery, content } });

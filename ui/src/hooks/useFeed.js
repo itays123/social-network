@@ -21,6 +21,6 @@ const FEED_QUERY = gql`
 `;
 
 export default function useFeed() {
-  const { data } = useQuery(FEED_QUERY);
-  return { feed: data?.feed || [] };
+  const { data, refetch } = useQuery(FEED_QUERY);
+  return { feed: data?.feed || [], refetch };
 }

@@ -5,11 +5,11 @@ import ProfilePic from '../ProfilePic/ProfilePic';
 import ResizeableTextArea from '../ResizeableTextArea/ResizeableTextArea';
 import { usePost } from '../../hooks/usePost';
 
-const CreatePost = () => {
+const CreatePost = ({ refetchPosts }) => {
   const { avatarUrl, name } = useProfile();
   const [content, setContent] = useState('');
   const [expand, setExpand] = useState(false);
-  const { post } = usePost();
+  const { post } = usePost(refetchPosts);
   const placeHolder = `What's on your mind, ${name ? name.split(' ')[0] : ''}?`;
   return (
     <div className="create-post">
