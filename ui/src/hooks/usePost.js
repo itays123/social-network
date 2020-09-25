@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const POST = gql`
   mutation PostIt($gallery: [String] = [], $content: String = "") {
