@@ -1,7 +1,13 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import './ResizeableTextArea.css';
 
-const ResizeableTextArea = ({ placeholder, onChange = () => {} }) => {
+const ResizeableTextArea = ({
+  placeholder,
+  onChange = () => {},
+  value,
+  onFocus = () => {},
+  onBlur = () => {},
+}) => {
   const ref = useRef({ scrollHeight: 37 });
   const [refHeight, setHeight] = useState(ref.current.scrollHeight);
   const updateHeight = () => {
@@ -14,6 +20,7 @@ const ResizeableTextArea = ({ placeholder, onChange = () => {} }) => {
     <textarea
       className="resizeable"
       ref={ref}
+      value={value}
       placeholder={placeholder || ''}
       onChange={e => {
         updateHeight();
@@ -26,6 +33,8 @@ const ResizeableTextArea = ({ placeholder, onChange = () => {} }) => {
       style={{
         height: refHeight,
       }}
+      onFocus={() => onFocus()}
+      onBlur={() => onBlur()}
     />
   );
 };

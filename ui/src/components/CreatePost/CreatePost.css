@@ -20,3 +20,15 @@
   width: 100%;
   padding-top: 8px;
 }
+
+.create-post form button {
+  margin: 0 8px 8px 0;
+  padding: 6px 12px;
+  border: 1px solid #cdcdcd;
+  background: #666;
+  border-radius: 16px;
+  font: inherit;
+  font-size: 80%;
+  color: #efefef;
+  cursor: pointer;
+}

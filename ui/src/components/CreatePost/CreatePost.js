@@ -8,14 +8,18 @@ import { usePost } from '../../hooks/usePost';
 const CreatePost = () => {
   const { avatarUrl, name } = useProfile();
   const [content, setContent] = useState('');
+  const [expand, setExpand] = useState(false);
   const { post } = usePost();
   const placeHolder = `What's on your mind, ${name ? name.split(' ')[0] : ''}?`;
   return (
     <div className="create-post">
       <form
+        className={expand ? 'expanded' : 'minified'}
         onSubmit={e => {
           e.preventDefault();
           post([], content);
+          setContent('');
+          setExpand(false);
         }}
       >
         <div className="text flex a-stretch">
@@ -25,13 +29,20 @@ const CreatePost = () => {
           <div className="rta-container">
             <ResizeableTextArea
               onChange={c => setContent(c)}
+              value={content}
+              onFocus={() => setExpand(true)}
+              onBlur={() => setExpand(() => content.trim() !== '')}
               placeholder={placeHolder}
             />
           </div>
         </div>
-        <div className="flex a-center j-center">
-          <button>Post</button>
-        </div>
+        {expand && (
+          <div className="expanded">
+            <div className="flex j-end">
+              <button>Post</button>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
