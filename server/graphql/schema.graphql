@@ -45,8 +45,9 @@ type Query {
   feed(first: Int = 25): [Post]
   @cypher(
     statement: """
-    MATCH (u:User)-[:FOLLOWS]->(:User)-[:POSTED]->(p:Post)
+    MATCH (u:User), (p:Post)
     WHERE id(u) = $cypherParams.uid
+    AND ((u)-[:FOLLOWS]->(:User)-[:POSTED]->(p) OR (u)-[:POSTED]->(p))
     RETURN p
     ORDER BY p.date DESC
     LIMIT $first
