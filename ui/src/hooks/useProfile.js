@@ -31,22 +31,28 @@ const PROFILE_QUERY = gql`
 const ProfileContext = createContext();
 
 export function ProfileContextProvider({ children }) {
-  const { data, loading } = useQuery(PROFILE_QUERY);
+  const { data, loading, refetch } = useQuery(PROFILE_QUERY);
+  const [profile, setProfile] = useState({});
   const [status, setStatus] = useState(0);
 
   useEffect(() => {
+    setProfile(p => {
+      if (p._id) return p;
+      else return data?.Profile || {};
+    });
     setStatus(() => {
-      if (data?.Profile) return 200;
+      if (data?.Profile || profile._id) return 200;
       else if (loading) return 0;
       else return 401;
     });
-  }, [data, loading]);
+  }, [data, loading, profile]);
 
   return (
     <ProfileContext.Provider
       value={{
-        profile: data?.Profile || {},
+        profile,
         status,
+        refetch,
       }}
     >
       {children}
