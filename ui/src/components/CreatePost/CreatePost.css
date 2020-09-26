@@ -6,6 +6,10 @@
 
 .create-post form {
   margin: 8px 0 4px;
+}
+
+.create-post form .text,
+.create-post form .expanded {
   border: 1px solid #ddd;
   border-radius: 4px;
   min-width: 300px;
@@ -14,6 +18,21 @@
 
 .create-post form .text {
   padding: 12px 12px 8px;
+  border-bottom: 0px none transparent;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.create-post form .expanded {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  height: 8px;
+  overflow: hidden;
+  border-top: 0px none transparent;
+}
+
+.create-post[data-expanded='true'] .expanded {
+  height: 248px;
 }
 
 .create-post form .rta-container {
