@@ -6,6 +6,8 @@ import Like from '../Like/Like';
 import { useLike } from '../../hooks/useLike';
 import ProfilePic from '../ProfilePic/ProfilePic';
 import PostGallery from '../PostGallery/PostGallery';
+import { useDeletePost } from '../../hooks/useDeletePost';
+import deleteIcon from '../../assets/delete.svg';
 
 const Author = ({ author }) => (
   <Link to={`/u/${author._id}`}>{author.name}</Link>
@@ -21,17 +23,27 @@ const Post = ({
   gallery,
 }) => {
   const { likes, isLiked, toggle } = useLike(initialIsLiked, initialLikes, _id);
+  const { allowDelete, remove } = useDeletePost(() => {}, _id, author._id);
   return (
     <div className="post flex column a-stretch">
-      <header className="flex a-stretch">
-        <div className="profile">
-          <ProfilePic url={author.avatarUrl} />
-        </div>
-        <div>
-          <Author author={author} />
-          <div className="date">
-            {moment(new Date(date.formatted)).fromNow()}
+      <header className="flex a-stretch j-btwn">
+        <div className="flex a-stretch">
+          <div className="profile">
+            <ProfilePic url={author.avatarUrl} />
           </div>
+          <div>
+            <Author author={author} />
+            <div className="date">
+              {moment(new Date(date.formatted)).fromNow()}
+            </div>
+          </div>
+        </div>
+        <div className="options">
+          {allowDelete && (
+            <button onClick={remove}>
+              <img src={deleteIcon} alt="" />
+            </button>
+          )}
         </div>
       </header>
       <main>

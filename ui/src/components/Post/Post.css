@@ -33,6 +33,18 @@
   color: #606060;
 }
 
+.post header .options button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.post header .options button:focus {
+  border: none;
+  outline: none;
+}
+
 .post main p {
   color: #505050;
 }
