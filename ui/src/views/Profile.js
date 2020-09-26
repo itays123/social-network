@@ -10,7 +10,7 @@ const Profile = () => {
       {profile.status === 200 && (
         <>
           <UserCard {...profile} self />
-          <PostList posts={profile.created} />
+          <PostList posts={profile.created} refetchPosts={profile.refetch} />
         </>
       )}
     </div>

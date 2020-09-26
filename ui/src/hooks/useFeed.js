@@ -1,4 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
+import useProfile from './useProfile';
 
 const FEED_QUERY = gql`
   {
@@ -22,5 +23,12 @@ const FEED_QUERY = gql`
 
 export default function useFeed() {
   const { data, refetch } = useQuery(FEED_QUERY);
-  return { feed: data?.feed || [], refetch };
+  const profile = useProfile();
+  return {
+    feed: data?.feed || [],
+    refetch: () => {
+      refetch();
+      if (profile.refetch) profile.refetch();
+    },
+  };
 }

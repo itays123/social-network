@@ -37,8 +37,9 @@ export function ProfileContextProvider({ children }) {
 
   useEffect(() => {
     setProfile(p => {
-      if (p._id) return p;
-      else return data?.Profile || {};
+      if (data?.Profile) return data.Profile;
+      else if (p._id) return p;
+      else return {};
     });
     setStatus(() => {
       if (data?.Profile || profile._id) return 200;
@@ -61,6 +62,6 @@ export function ProfileContextProvider({ children }) {
 }
 
 export default function useProfile() {
-  const { profile, status } = useContext(ProfileContext);
-  return { ...profile, status };
+  const { profile, status, refetch } = useContext(ProfileContext);
+  return { ...profile, status, refetch };
 }

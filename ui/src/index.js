@@ -17,8 +17,14 @@ const client = new ApolloClient({
           feed: {
             merge: false,
           },
-          Profile: {
-            merge: false,
+        },
+      },
+      User: {
+        fields: {
+          created: {
+            merge(existing, incoming) {
+              return [...incoming];
+            },
           },
         },
       },
