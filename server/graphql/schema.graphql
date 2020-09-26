@@ -9,17 +9,21 @@ type User {
   following: [User] @relation(name: "FOLLOWS", direction: "OUT")
   followers: [User] @relation(name: "FOLLOWS", direction: "IN")
   followingCount: Int
-  @cypher(statement: "MATCH (this: User)-[:FOLLOWS]->(u: User) RETURN count(u)")
+    @cypher(
+      statement: "MATCH (this: User)-[:FOLLOWS]->(u: User) RETURN count(u)"
+    )
   followerCount: Int
-  @cypher(statement: "MATCH (this: User)<-[:FOLLOWS]-(u: User) RETURN count(u)")
+    @cypher(
+      statement: "MATCH (this: User)<-[:FOLLOWS]-(u: User) RETURN count(u)"
+    )
   isFollowing: Boolean
-  @cypher(
-    statement: """
-    MATCH (this:User)<-[r:FOLLOWS]-(u:User)
-    WHERE id(u) = $cypherParams.uid
-    RETURN count(r) > 0
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (this:User)<-[r:FOLLOWS]-(u:User)
+      WHERE id(u) = $cypherParams.uid
+      RETURN count(r) > 0
+      """
+    )
 }
 
 type Post {
@@ -27,110 +31,152 @@ type Post {
   date: _Neo4jDateTime
   content: String!
   likes: Int
-  @cypher(statement: "MATCH (this: Post)<-[:LIKED]-(u:User) RETURN count(u)")
+    @cypher(statement: "MATCH (this: Post)<-[:LIKED]-(u:User) RETURN count(u)")
   Author: User
-  @cypher(statement: "MATCH (this: Post)<-[:POSTED]-(u:User) RETURN u LIMIT 1")
+    @cypher(
+      statement: "MATCH (this: Post)<-[:POSTED]-(u:User) RETURN u LIMIT 1"
+    )
   isLiked: Boolean
-  @cypher(
-    statement: """
-    MATCH (this:Post)<-[r:LIKED]-(u:User)
-    WHERE id(u) = $cypherParams.uid
-    RETURN count(r) > 0
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (this:Post)<-[r:LIKED]-(u:User)
+      WHERE id(u) = $cypherParams.uid
+      RETURN count(r) > 0
+      """
+    )
   gallery: [String]
+  Comments: [Comment] @relation(name: "ON", direction: "IN")
+  commentCount: Int
+    @cypher(
+      statement: """
+      MATCH (c:Comment)-[:ON]->(this:Post)
+      RETURN count(c)
+      """
+    )
+}
+
+type Comment {
+  content: String!
+  date: _Neo4jDateTime
+  Author: User
+    @cypher(
+      statement: """
+      MATCH (this:Comment)<-[:COMMENTED]-(u:User)
+      RETURN u
+      """
+    )
 }
 
 type Query {
   feed(first: Int = 25): [Post]
-  @cypher(
-    statement: """
-    MATCH (u:User), (p:Post)
-    WHERE id(u) = $cypherParams.uid
-    AND ((u)-[:FOLLOWS]->(:User)-[:POSTED]->(p) OR (u)-[:POSTED]->(p))
-    RETURN p
-    ORDER BY p.date DESC
-    LIMIT $first
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User), (p:Post)
+      WHERE id(u) = $cypherParams.uid
+      AND ((u)-[:FOLLOWS]->(:User)-[:POSTED]->(p) OR (u)-[:POSTED]->(p))
+      RETURN p
+      ORDER BY p.date DESC
+      LIMIT $first
+      """
+    )
   Profile: User
-  @cypher(
-    statement: """
-    MATCH (u:User) WHERE id(u) = $cypherParams.uid
-    RETURN u
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User) WHERE id(u) = $cypherParams.uid
+      RETURN u
+      """
+    )
   Search(q: String, limit: Int = 25, offset: Int = 0): [User]
-  @cypher(
-    statement: """
-    MATCH (u:User) WHERE u.name CONTAINS $q
-    RETURN u
-    SKIP $offset
-    LIMIT $limit
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User) WHERE u.name CONTAINS $q
+      RETURN u
+      SKIP $offset
+      LIMIT $limit
+      """
+    )
 }
 
 type Mutation {
   NewPost(content: String = "", gallery: [String] = []): Post
-  @cypher(
-    statement: """
-    MATCH (u:User) WHERE id(u) = $cypherParams.uid
-    CREATE (p: Post {content: $content, gallery: $gallery, date: datetime() })<-[:POSTED]-(u)
-    RETURN p
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User) WHERE id(u) = $cypherParams.uid
+      CREATE (p: Post {content: $content, gallery: $gallery, date: datetime() })<-[:POSTED]-(u)
+      RETURN p
+      """
+    )
   RemovePost(postId: Int): User
-  @cypher(
-    statement: """
-    MATCH (u:User)-[:POSTED]->(p:Post)
-    WHERE id(u) = $cypherParams.uid AND id(p) = $postId
-    DETACH DELETE p
-    RETURN u
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User)-[:POSTED]->(p:Post)
+      WHERE id(u) = $cypherParams.uid AND id(p) = $postId
+      DETACH DELETE p
+      RETURN u
+      """
+    )
   Follow(userId: Int): User
-  @cypher(
-    statement: """
-    MATCH (a:User), (b: User)
-    WHERE id(a) = $cypherParams.uid AND id(b) = $userId
-    CREATE (a)-[:FOLLOWS]->(b)
-    RETURN b
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (a:User), (b: User)
+      WHERE id(a) = $cypherParams.uid AND id(b) = $userId
+      CREATE (a)-[:FOLLOWS]->(b)
+      RETURN b
+      """
+    )
   Unfollow(userId: Int): User
-  @cypher(
-    statement: """
-    MATCH (a:User)-[r:FOLLOWS]->(b:User)
-    WHERE id(a) = $cypherParams.uid AND id(b) = $userId
-    DELETE r
-    RETURN b
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (a:User)-[r:FOLLOWS]->(b:User)
+      WHERE id(a) = $cypherParams.uid AND id(b) = $userId
+      DELETE r
+      RETURN b
+      """
+    )
   Like(postId: Int): Post
-  @cypher(
-    statement: """
-    MATCH (u:User), (p:Post)
-    WHERE id(u) = $cypherParams.uid AND id(p) = $postId
-    CREATE (u)-[:LIKED]->(p)
-    RETURN p
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User), (p:Post)
+      WHERE id(u) = $cypherParams.uid AND id(p) = $postId
+      CREATE (u)-[:LIKED]->(p)
+      RETURN p
+      """
+    )
   Unlike(postId: Int): Post
-  @cypher(
-    statement: """
-    MATCH (u:User)-[r:LIKED]->(p:Post)
-    WHERE id(u) = $cypherParams.uid AND id(p) = $postId
-    DELETE r
-    RETURN p
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User)-[r:LIKED]->(p:Post)
+      WHERE id(u) = $cypherParams.uid AND id(p) = $postId
+      DELETE r
+      RETURN p
+      """
+    )
   SetAvatarUrl(url: String): User
-  @cypher(
-    statement: """
-    MATCH (u:User) WHERE id(u) = $cypherParams.uid
-    SET u.avatarUrl = $url
-    RETURN u
-    """
-  )
+    @cypher(
+      statement: """
+      MATCH (u:User) WHERE id(u) = $cypherParams.uid
+      SET u.avatarUrl = $url
+      RETURN u
+      """
+    )
+  Comment(content: String, postId: Int): Comment
+    @cypher(
+      statement: """
+      MATCH (u:User), (p:Post)
+      WHERE id(u) = $cypherParams.uid AND id(p) = $postId
+      CREATE (u)-[:COMMENTED]->(c: Comment { date: datetime(), content: $content })-[:ON]->(p)
+      RETURN c
+      """
+    )
+  RemoveComment(commentId: Int): Post
+    @cypher(
+      statement: """
+      MATCH (u:User), (c:Comment)-[:ON]->(p:Post)
+      WHERE ((u)-[:COMMENTED]->(c) OR (u)-[:POSTED]->(p))
+      AND id(u) = $cypherParams.uid
+      AND id(c) = $commentId
+      DETACH DELETE c
+      RETURN p
+      """
+    )
 }
