@@ -23,6 +23,7 @@ const PROFILE_QUERY = gql`
         }
         likes
         isLiked
+        commentCount
       }
     }
   }

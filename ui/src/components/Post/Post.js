@@ -8,6 +8,7 @@ import ProfilePic from '../ProfilePic/ProfilePic';
 import PostGallery from '../PostGallery/PostGallery';
 import { useDeletePost } from '../../hooks/useDeletePost';
 import deleteIcon from '../../assets/delete.svg';
+import commentIcon from '../../assets/comment.svg';
 
 const Author = ({ author }) => (
   <Link to={`/u/${author._id}`}>{author.name}</Link>
@@ -20,6 +21,7 @@ const Post = ({
   date,
   likes: initialLikes,
   isLiked: initialIsLiked,
+  commentCount,
   gallery,
   refetchPosts = () => {},
 }) => {
@@ -55,6 +57,12 @@ const Post = ({
         <div className="likes flex">
           <Like isLiked={isLiked} toggle={toggle} />
           <span>{likes}</span>
+        </div>
+        <div className="comments flex">
+          <button>
+            <img src={commentIcon} alt="" />
+          </button>
+          <span>{commentCount}</span>
         </div>
       </footer>
     </div>

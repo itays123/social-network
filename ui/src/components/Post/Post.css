@@ -53,6 +53,16 @@
   padding: 8px;
 }
 
-.post .likes span {
+.post .likes span,
+.post .comments span {
   margin-left: 4px;
+}
+
+.post .comments {
+  margin-left: 12px;
+}
+
+.post .comments button {
+  background: none;
+  border: none;
 }
