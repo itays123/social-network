@@ -10,7 +10,17 @@ console.log(process.env.REACT_APP_SERVER_URL);
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_SERVER_URL || '/graphql',
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          feed: {
+            merge: false,
+          },
+        },
+      },
+    },
+  }),
 });
 
 ReactDOM.render(
