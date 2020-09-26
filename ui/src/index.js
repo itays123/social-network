@@ -17,6 +17,9 @@ const client = new ApolloClient({
           feed: {
             merge: false,
           },
+          Profile: {
+            merge: false,
+          },
         },
       },
     },
