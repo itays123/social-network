@@ -45,7 +45,15 @@ type Post {
       """
     )
   gallery: [String]
-  Comments: [Comment] @relation(name: "ON", direction: "IN")
+  Comments(first: Int = 3): [Comment]
+    @cypher(
+      statement: """
+      MATCH (c:Comment)-[:ON]->(this:Post)
+      RETURN c
+      ORDER BY c.date DESC
+      LIMIT $first
+      """
+    )
   commentCount: Int
     @cypher(
       statement: """
