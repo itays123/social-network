@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="home route">
       <CreatePost refetchPosts={refetch} />
-      <PostList posts={feed} />
+      <PostList posts={feed} refetchPosts={refetch} />
     </div>
   );
 };

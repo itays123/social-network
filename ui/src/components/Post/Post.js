@@ -21,9 +21,10 @@ const Post = ({
   likes: initialLikes,
   isLiked: initialIsLiked,
   gallery,
+  refetchPosts = () => {},
 }) => {
   const { likes, isLiked, toggle } = useLike(initialIsLiked, initialLikes, _id);
-  const { allowDelete, remove } = useDeletePost(() => {}, _id, author._id);
+  const { allowDelete, remove } = useDeletePost(refetchPosts, _id, author._id);
   return (
     <div className="post flex column a-stretch">
       <header className="flex a-stretch j-btwn">
