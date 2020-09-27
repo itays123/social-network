@@ -1,0 +1,16 @@
+.comment a {
+  font: inherit;
+  text-decoration: inherit;
+  color: inherit;
+  font-weight: bold;
+  font-size: 80%;
+  color: #000030;
+}
+
+.comment .profile {
+  margin-right: 4px;
+}
+
+.comment p {
+  font-size: 80%;
+}

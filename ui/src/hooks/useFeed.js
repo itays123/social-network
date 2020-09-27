@@ -23,6 +23,7 @@ const FEED_QUERY = gql`
         Author {
           name
           avatarUrl
+          _id
         }
       }
     }

@@ -10,6 +10,7 @@ import { useDeletePost } from '../../hooks/useDeletePost';
 import deleteIcon from '../../assets/delete.svg';
 import commentIcon from '../../assets/comment.svg';
 import { motion } from 'framer-motion';
+import CommentList from '../CommentList/CommentList';
 
 const Author = ({ author }) => (
   <Link to={`/u/${author._id}`}>{author.name}</Link>
@@ -78,9 +79,7 @@ const Post = ({
           damping: 30,
         }}
       >
-        {Comments.map(c => (
-          <p>{c.content}</p>
-        ))}
+        <CommentList comments={Comments} />
       </motion.div>
     </div>
   );

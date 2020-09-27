@@ -28,6 +28,7 @@ const USER_QUERY = gql`
           Author {
             name
             avatarUrl
+            _id
           }
         }
       }
