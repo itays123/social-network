@@ -17,7 +17,9 @@ module.exports = {
     if (!user) throw new Error("user with this email doesn't exist");
     const userId = user.get('id').low;
     const encryptedPassword = user.get('password');
-    console.log(userId, encryptedPassword, password);
+    const isPasswordsMatch = bcrypt.compareSync(password, encryptedPassword);
+    if (!isPasswordsMatch) throw new Error('wrong password');
+    console.log(userId);
     return '';
   },
   async Signup(obj, { email, password, name, avatarUrl }, { driver }) {
