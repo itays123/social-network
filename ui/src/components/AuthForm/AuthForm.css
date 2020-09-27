@@ -1,0 +1,52 @@
+.auth-form {
+  background: #fefefe;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 4px;
+  border: 1px solid #dcdcdc;
+}
+
+.input-field {
+  padding: 4px;
+  margin-bottom: 8px;
+}
+
+.input-field * {
+  display: block;
+}
+
+.input-field label {
+  font-size: 80%;
+  text-transform: capitalize;
+}
+
+.input-field .error {
+  font-size: 80%;
+  color: #aa0000;
+}
+
+.input-field input {
+  border: none;
+  background: transparent;
+  font: inherit;
+  min-width: 200px;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.input-field input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #666;
+}
+
+.auth-form .submit button {
+  padding: 6px 12px;
+  border: 1px solid #cdcdcd;
+  background: #666;
+  border-radius: 16px;
+  font: inherit;
+  font-size: 80%;
+  color: #efefef;
+  cursor: pointer;
+}
