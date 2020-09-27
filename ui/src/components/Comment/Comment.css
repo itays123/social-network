@@ -14,3 +14,13 @@
 .comment p {
   font-size: 80%;
 }
+
+.comment .options button {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.comment .options button:focus {
+  outline: none;
+}

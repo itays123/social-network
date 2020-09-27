@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import useProfile from './useProfile';
 
 const DELETE_COMMENT = gql`
-  mutation DeleteComment(commentId: Int) {
+  mutation DeleteComment($commentId: Int) {
     RemoveComment(commentId: $commentId) {
       Comments(first: 3) {
         _id
@@ -18,13 +18,14 @@ const DELETE_COMMENT = gql`
   }
 `;
 
-export function useDeleteComment(commentId, postAuthorId, commentAuthorId) {
+export function useDeleteComment(postAuthorId) {
   const [RemoveComment] = useMutation(DELETE_COMMENT);
   const { status, _id } = useProfile();
-  const allowDelete =
-    status === 200 && (_id === postAuthorId || _id === commentAuthorId);
+
   return {
-    allowDelete,
-    remove: () => RemoveComment({ variables: { commentId } }),
+    allowDelete: commentAuthorId =>
+      status === 200 && (_id === postAuthorId || _id === commentAuthorId),
+    remove: commentId =>
+      RemoveComment({ variables: { commentId: Number(commentId) } }),
   };
 }

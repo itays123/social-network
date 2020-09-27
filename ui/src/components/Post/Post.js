@@ -82,7 +82,7 @@ const Post = ({
           damping: 30,
         }}
       >
-        <CommentList comments={Comments} />
+        <CommentList comments={Comments} postAuthorId={author._id} />
         <CreateComment comment={comment} />
       </motion.div>
     </div>
