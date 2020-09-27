@@ -24,9 +24,6 @@ const FEED_QUERY = gql`
           name
           avatarUrl
         }
-        date {
-          formatted
-        }
       }
     }
   }

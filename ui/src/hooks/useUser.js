@@ -29,9 +29,6 @@ const USER_QUERY = gql`
             name
             avatarUrl
           }
-          date {
-            formatted
-          }
         }
       }
     }

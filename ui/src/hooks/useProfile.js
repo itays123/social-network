@@ -30,9 +30,6 @@ const PROFILE_QUERY = gql`
             name
             avatarUrl
           }
-          date {
-            formatted
-          }
         }
       }
     }
