@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 
 const COMMENT = gql`
-  mutation CommentIt(content: String, postId: Int) {
+  mutation CommentIt($content: String, $postId: Int) {
     Comment(content: $content, postId: $postId) {
       _id
     }

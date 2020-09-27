@@ -11,6 +11,8 @@ import deleteIcon from '../../assets/delete.svg';
 import commentIcon from '../../assets/comment.svg';
 import { motion } from 'framer-motion';
 import CommentList from '../CommentList/CommentList';
+import CreateComment from '../CreateComment/CreateComment';
+import { useComment } from '../../hooks/useComment';
 
 const Author = ({ author }) => (
   <Link to={`/u/${author._id}`}>{author.name}</Link>
@@ -29,6 +31,7 @@ const Post = ({
   refetchPosts = () => {},
 }) => {
   const { likes, isLiked, toggle } = useLike(initialIsLiked, initialLikes, _id);
+  const { comment } = useComment(_id);
   const { allowDelete, remove } = useDeletePost(refetchPosts, _id, author._id);
   const [showLatestComments, toggleLatestComments] = useState(false);
   return (
@@ -80,6 +83,7 @@ const Post = ({
         }}
       >
         <CommentList comments={Comments} />
+        <CreateComment comment={comment} />
       </motion.div>
     </div>
   );

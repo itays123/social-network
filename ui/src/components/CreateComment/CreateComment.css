@@ -1,0 +1,32 @@
+.create-comment {
+  padding: 8px 12px;
+}
+
+.create-comment form .rta-container {
+  width: 100%;
+  padding-top: 8px;
+}
+
+.create-comment .expanded {
+  height: 8px;
+  overflow: hidden;
+}
+
+.create-comment[data-expand='true'] .expanded {
+  height: auto;
+}
+
+.create-comment .submit {
+  margin-top: 8px;
+}
+
+.create-comment button {
+  padding: 6px 12px;
+  border: 1px solid #cdcdcd;
+  background: #666;
+  border-radius: 16px;
+  font: inherit;
+  font-size: 80%;
+  color: #efefef;
+  cursor: pointer;
+}
