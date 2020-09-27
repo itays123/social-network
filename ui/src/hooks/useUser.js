@@ -24,6 +24,7 @@ const USER_QUERY = gql`
         isLiked
         commentCount
         Comments(first: 3) {
+          _id
           content
           Author {
             name

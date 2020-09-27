@@ -1,0 +1,30 @@
+import { gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import useProfile from './useProfile';
+
+const DELETE_COMMENT = gql`
+  mutation DeleteComment(commentId: Int) {
+    RemoveComment(commentId: $commentId) {
+      Comments(first: 3) {
+        _id
+        content
+        Author {
+          name
+          avatarUrl
+          _id
+        }
+      }
+    }
+  }
+`;
+
+export function useDeleteComment(commentId, postAuthorId, commentAuthorId) {
+  const [RemoveComment] = useMutation(DELETE_COMMENT);
+  const { status, _id } = useProfile();
+  const allowDelete =
+    status === 200 && (_id === postAuthorId || _id === commentAuthorId);
+  return {
+    allowDelete,
+    remove: () => RemoveComment({ variables: { commentId } }),
+  };
+}
