@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const neo4j = require('neo4j-driver');
 const { ApolloServer } = require('apollo-server-express');
-const { typeDefs } = require('./graphql/graphql-schema');
+const { typeDefs, resolvers } = require('./graphql/graphql-schema');
 const { makeAugmentedSchema } = require('neo4j-graphql-js');
 const express = require('express');
 const cors = require('cors');
@@ -13,6 +13,7 @@ const port = Number(process.env.PORT) || 8080;
 
 const schema = makeAugmentedSchema({
   typeDefs,
+  resolvers,
 });
 
 const driver = neo4j.driver(
