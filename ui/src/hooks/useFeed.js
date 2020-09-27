@@ -18,6 +18,16 @@ const FEED_QUERY = gql`
       likes
       isLiked
       commentCount
+      Comments(first: 3) {
+        content
+        Author {
+          name
+          avatarUrl
+        }
+        date {
+          formatted
+        }
+      }
     }
   }
 `;

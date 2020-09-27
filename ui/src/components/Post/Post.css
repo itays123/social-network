@@ -4,15 +4,25 @@
 
 .post {
   margin: 8px 0;
-  border: var(--post-border);
-  border-radius: 4px;
   min-width: 300px;
-  background-color: #fefefe;
 }
 
 .post header,
 .post main {
+  background-color: #fefefe;
   padding: 8px 12px;
+}
+
+.post header {
+  border: var(--post-border);
+  border-bottom: none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.post main {
+  border-left: var(--post-border);
+  border-right: var(--post-border);
 }
 
 .post header .profile {
@@ -51,6 +61,9 @@
 
 .post footer {
   padding: 8px;
+  background-color: #fefefe;
+  border-left: var(--post-border);
+  border-right: var(--post-border);
 }
 
 .post .likes span,
@@ -65,4 +78,18 @@
 .post .comments button {
   background: none;
   border: none;
+}
+
+.post .latest-comments {
+  height: 8px;
+  background: #fefefe;
+  border: var(--post-border);
+  border-top: none;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  overflow: hidden;
+}
+
+.post .latest-comments[data-show='true'] {
+  height: auto;
 }
