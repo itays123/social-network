@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "graphql-tag": "^2.11.0",
     "graphql-tools": "^6.2.1",
+    "jsonwebtoken": "^8.5.1",
     "neo4j-driver": "^4.1.2",
     "neo4j-graphql-js": "^2.16.3"
   }
