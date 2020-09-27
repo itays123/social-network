@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { Login } = require('./resolvers');
+const { Login, Signup } = require('./resolvers');
 
 const typeDefs = fs
   .readFileSync(path.join(__dirname, 'schema.graphql'))
@@ -9,6 +9,9 @@ const typeDefs = fs
 const resolvers = {
   Query: {
     Login,
+  },
+  Mutation: {
+    Signup,
   },
 };
 
