@@ -55,7 +55,11 @@ const AuthForm = ({
       onSubmit={e => {
         e.preventDefault();
         setSubmitted(true);
-        if (isValidated.name && isValidated.email && isValidated.password)
+        if (
+          (!name || isValidated.name) &&
+          (!email || isValidated.email) &&
+          (!password || isValidated.password)
+        )
           onSubmit();
       }}
     >
