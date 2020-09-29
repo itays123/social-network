@@ -6,6 +6,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import useProfile from '../../hooks/useProfile';
 import AuthOnly from '../AuthOnly/AuthOnly';
 import ProfilePic from '../ProfilePic/ProfilePic';
+import { useSignout } from '../../hooks/useSignout';
 
 const Link = ({ to, children }) => (
   <NavLink className="flex a-center" to={to}>
@@ -17,6 +18,7 @@ const Devider = () => <div className="flex a-center devider"> | </div>;
 
 const Navbar = () => {
   const { avatarUrl } = useProfile();
+  const { signout } = useSignout();
   return (
     <nav>
       <div className="wrapper flex a-center j-btwn">
@@ -29,7 +31,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
             <AuthOnly>
               <Devider />
-              <Link to="/">Sign Out</Link>
+              <button onClick={signout}>Sign Out</button>
             </AuthOnly>
             <AuthOnly reversed>
               <Devider />

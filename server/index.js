@@ -6,6 +6,7 @@ const { makeAugmentedSchema } = require('neo4j-graphql-js');
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const auth = require('./auth');
 
 dotenv.config();
 
@@ -25,13 +26,15 @@ const driver = neo4j.driver(
 );
 
 const server = new ApolloServer({
-  context: req => ({
-    driver,
-    ...req,
-    cypherParams: {
-      uid: req.user ? req.user.id : 0,
-    },
-  }),
+  context: req => {
+    return {
+      driver,
+      ...req,
+      cypherParams: {
+        uid: req.req.user.id,
+      },
+    };
+  },
   introspection: true,
   playground: true,
   schema: schema,
@@ -42,6 +45,8 @@ const app = express();
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(auth);
 
 server.applyMiddleware({ app });
 

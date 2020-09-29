@@ -13,6 +13,7 @@ const getJWT = userId =>
 
 module.exports = {
   async Login(obj, { email, password }, { driver }) {
+    console.log('login request made');
     const [user] = await cypher(
       driver,
       'MATCH (u:User { email: $email }) RETURN id(u) AS id, u.password AS password',
@@ -42,7 +43,7 @@ module.exports = {
       'CREATE (u:User { email: $email, password: $password, name: $name, avatarUrl: $avatarUrl }) RETURN id(u) AS id',
       { email, password: encryptedPassword, name, avatarUrl }
     );
-    const userId = newUser.get('id');
+    const userId = newUser.get('id').low;
     const token = getJWT(userId);
     return token;
   },

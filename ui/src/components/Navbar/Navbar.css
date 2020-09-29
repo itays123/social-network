@@ -22,7 +22,10 @@ nav .links {
   }
 }
 
-nav a {
+nav a,
+nav button {
+  background: none;
+  border: none;
   font: inherit;
   text-decoration: inherit;
   color: inherit;

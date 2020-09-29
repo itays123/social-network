@@ -47,16 +47,20 @@ export function ProfileContextProvider({ children }) {
 
   useEffect(() => {
     setProfile(p => {
-      if (data?.Profile) return data.Profile;
+      if (!localStorage.getItem('token')) return {};
+      else if (data?.Profile) return data.Profile;
       else if (p._id) return p;
       else return {};
     });
+  }, [data]);
+
+  useEffect(() => {
     setStatus(() => {
-      if (data?.Profile || profile._id) return 200;
+      if (localStorage.getItem('token')) return 200;
       else if (loading) return 0;
       else return 401;
     });
-  }, [data, loading, profile]);
+  }, [data, profile, loading]);
 
   return (
     <ProfileContext.Provider

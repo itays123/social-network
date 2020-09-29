@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { gql } from '@apollo/client';
 import { useLazyQuery } from '@apollo/client';
+import useProfile from './useProfile';
 
 const LOGIN_QUERY = gql`
   query EmailPasswordLogin($email: String, $password: String) {
@@ -10,10 +11,14 @@ const LOGIN_QUERY = gql`
 
 export function useLogin() {
   const [Login, { data, error }] = useLazyQuery(LOGIN_QUERY);
+  const { refetch } = useProfile();
 
   useEffect(() => {
-    if (data?.Login) localStorage.setItem('token', data.Login);
-  }, [data]);
+    if (data?.Login) {
+      localStorage.setItem('token', data.Login);
+      refetch();
+    }
+  }, [data, refetch]);
 
   return {
     error,
