@@ -13,7 +13,6 @@ const getJWT = userId =>
 
 module.exports = {
   async Login(obj, { email, password }, { driver }) {
-    console.log('login request made');
     const [user] = await cypher(
       driver,
       'MATCH (u:User { email: $email }) RETURN id(u) AS id, u.password AS password',

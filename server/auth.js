@@ -33,7 +33,6 @@ const authMiddleware = (req, res, next) => {
   } catch (err) {
     req.user = {};
   } finally {
-    console.log(req.user);
     next();
   }
 };
